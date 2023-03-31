@@ -1,27 +1,26 @@
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import pyautogui
-import os
+
+from personal_parser import (
+    parsers
+)
+
+args = parsers()
+print(args)
 
 # Variables
 width, height = 1280, 720
-folder_path = 'resource/images'
 
 # Camera setup
 cap = cv2.VideoCapture(0)
-cap.set(3, width)
-cap.set(4, height)
-
-# Get the list of presentatoin images
-path_images = sorted(os.listdir(folder_path))
-# print(path_images)
 
 # Variables
 image_number = 0
 scale = .3
 gesture_threshold = 400
 pressed_button = False
-show_cam = False
+show_cam = args.show_cam
 
 #  Hand Detector
 detector = HandDetector(
@@ -60,7 +59,7 @@ while True:
 
             # Gesture 3 - Quit
             if fingers == [0, 1, 0, 0, 1]:
-                print('Rock')
+                print('You rock, baby!')
                 break
 
     # Button pressed itterations
